@@ -3,6 +3,28 @@
 
 {% block body %}
 
-    <h1>Test</h1>
+    <!-- Job listings -->
+    <section>
+        <div class="container mt-4">
+            {% for listing in listings %}
+                <div class="row">
+                    <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9 mx-auto border">
+                        <div class="d-flex justify-content-between mt-3 mb-3" >
+                            <div class="d-flex align-items-center">
+                                <img src="{{ listing.logo_url }}" alt="Logo" class="mr-3">
+                                <h1 class="h3 mr-3">
+                                    {{ listing.position_title }}<br><span class="h4">{{ listing.company }}</span><br>
+                                    <span class="h6">{{ listing.city }}, {{ listing.province_state }}, {{ listing.country }}. Posted: {{ listing.posted_date }}</span>
+                                </h1>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <a href="{% url 'view_listing' listing.id %}" class="btn btn-outline-dark mr-3">View</a> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 
 {% endblock %}
