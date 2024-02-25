@@ -10,7 +10,16 @@
                 <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9 mx-auto">
                     <form method="post" action="#" class="needs-validation" novalidate>
                         {% csrf_token %}
-                        {{ job_form.as_p }}
+                        {% for field in job_form %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}
+                                    {% if field.field.required %}
+                                        <span class="text-danger">*</span>
+                                    {% endif %}
+                                </label><br>
+                                {{ field }}
+                            </div>
+                        {% endfor %}
                         <button type="submit" class="btn btn-outline-dark mb-3 float-right">Create Listing</button>
                     </form>
                 </div>
@@ -19,5 +28,14 @@
     {% else %}
         <p>Not Signed In!</p>
     {% endif %}
+
+    <!-- Script -->
+    <script>
+        CKEDITOR.replace('id_summary');
+        CKEDITOR.replace('id_responsibilities');
+        CKEDITOR.replace('id_must_have');
+        CKEDITOR.replace('id_qualifications');
+        CKEDITOR.replace('id_bonus_skills');
+    </script>
 
 {% endblock %}

@@ -1,6 +1,8 @@
 from django.forms import ModelForm
 from django import forms
 
+from ckeditor.widgets import CKEditorWidget
+
 from .models import JobListing
 
 
@@ -19,11 +21,11 @@ class CreateListingForm(ModelForm):
             'country': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Country'}),
             'logo_url': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'Enter Image URL of company logo'}),
             'employment_type': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'E.g. Full-time, Par-time, Contract...'}),
-            'summary': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Give a summary of job, company, values, etc...'}),
-            'responsibilities': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'What does a day to day of the job look like?'}),
-            'must_have': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Qualifications that are non-negotiable...'}),
-            'qualifications': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Qualifications'}),
-            'bonus_skills': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Things that are nice to have not necessarily needed..'}),
+            'summary': forms.CharField(widget=CKEditorWidget()),
+            'responsibilities': forms.CharField(widget=CKEditorWidget()),
+            'must_have': forms.CharField(widget=CKEditorWidget()),
+            'qualifications': forms.CharField(widget=CKEditorWidget()),
+            'bonus_skills': forms.CharField(widget=CKEditorWidget()),
             'annual_salary': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter expected annual salary'}),
         }
         required = {

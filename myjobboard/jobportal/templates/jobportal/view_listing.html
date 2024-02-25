@@ -19,7 +19,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto">
                 {% if listing.summary %}
                     <h4 class="font-weight-light">Summary:</h2>
-                    <p >{{ listing.summary }}</p>
+                    <p >{{ listing.summary|safe }}</p>
                 {% endif %}
             </div>
         </div>
@@ -27,7 +27,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto">
                 {% if listing.responsibilities %}
                     <h4 class="font-weight-light">Responsibilities:</h2>
-                    <p >{{ listing.responsibilities }}</p>
+                    <p >{{ listing.responsibilities|safe }}</p>
                 {% endif %}
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto">
                 {% if listing.musthave %}
                     <h4 class="font-weight-light">MUST HAVE'S:</h2>
-                    <p >{{ listing.must_have }}</p>
+                    <p >{{ listing.must_have|safe }}</p>
                 {% endif %}
             </div>
         </div>
@@ -43,7 +43,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto">
                 {% if listing.qualifications %}
                     <h4 class="font-weight-light">Qualifications:</h2>
-                    <p >{{ listing.qualifications }}</p>
+                    <p >{{ listing.qualifications|safe }}</p>
                 {% endif %}
             </div>
         </div>
@@ -51,7 +51,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto">
                 {% if listing.bonus_skills %}
                     <h4 class="font-weight-light">Bonus Skills:</h2>
-                    <p >{{ listing.bonus_skills }}</p>
+                    <p >{{ listing.bonus_skills|safe }}</p>
                 {% endif %}
             </div>
         </div>
@@ -60,8 +60,8 @@
                 <h6 class="font-weight-light">
                     {% if listing.employment_type %}Employment Type: {{ listing.employment_type }},{% endif %}
                     Remote? {% if listing.is_remote %}Yes{% else %}No{% endif %}, 
-                    {% if listing.annual_salary %}Annual Salary: {{ listing.annual_salary }} USD{% endif %}
-                    <button href="#" class="btn btn-outline-dark mr-3 float-right" data-toggle="modal" data-target="#modal_{{ listing.id }}">apply</button> 
+                    {% if listing.annual_salary %}Annual Salary: {{ listing.annual_salary }} USD{% endif %}<br>
+                    <button href="#" class="btn btn-outline-dark mt-3 float-right" data-toggle="modal" data-target="#modal_{{ listing.id }}">apply</button> 
                 </h6>
             </div>
         </div>
