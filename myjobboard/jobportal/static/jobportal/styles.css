@@ -9,3 +9,7 @@ img {
     width: 100px;
     height: 100px;
 }
+
+#closed-row {
+    background-color: #f8f8f8;
+}

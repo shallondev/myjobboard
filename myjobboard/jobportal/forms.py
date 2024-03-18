@@ -3,7 +3,21 @@ from django import forms
 
 from ckeditor.widgets import CKEditorWidget
 
-from .models import JobListing
+from .models import JobListing, Application
+
+
+class UploadApplicationForm(ModelForm):
+    class Meta:
+        model = Application
+        fields = ['cover_letter', 'resume', 'first_name', 'middle_name', 'last_name', 'email']
+        widgets = {
+            'cover_letter' : forms.FileInput(attrs={'accept': 'application/pdf'}),
+            'resume' : forms.FileInput(attrs={'accept': 'application/pdf'}),
+            'first_name' : forms.TextInput(attrs={'class': 'form-control'}),
+            'middle_name' : forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name' : forms.TextInput(attrs={'class': 'form-control'}),
+            'email' : forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 
 class CreateListingForm(ModelForm):

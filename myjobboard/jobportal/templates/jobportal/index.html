@@ -3,28 +3,99 @@
 
 {% block body %}
 
+    <!-- Msg -->
+    <section>
+        {% if msg %}
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <h5 class="text-center text-info" id="app_msg">{{ msg }}</h5>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </section>
+
     <!-- Job listings -->
     <section>
         <div class="container mt-4">
             {% for listing in listings %}
+            {% if listing.is_active %}
                 <div class="row">
                     <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9 mx-auto border">
+                        <div class="d-flex justify-content-between mt-3 mb-3" >
+                            <div class="d-flex align-items-center">
+                                <img src="{{ listing.logo_url }}" alt="Logo" class="mr-3 ml-3">
+                                <h1 class="h3 mr-3">
+                                    {{ listing.position_title }}<br><span class="h4">{{ listing.company }}</span><br>
+                                    <span class="h6">
+                                        {% if listing.city %} {{ listing.city }}, {% endif %}
+                                        {% if listing.province_state %} {{ listing.province_state }}, {% endif %}
+                                        {{ listing.country }}. Posted: {{ listing.posted_date }}</span>
+                                </h1>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                {% if listing.posted_by == request.user %}
+                                    <a href="#" class="btn btn-outline-dark mr-3" data-toggle="modal" data-target="#modal_{{ listing.id }}">Manage</a>
+                                {% else %}
+                                    <a href="{% url 'view_listing' listing.id %}" class="btn btn-outline-dark mr-3">View</a> 
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                 <!-- Modal -->
+                 <div class="modal fade" id="modal_{{ listing.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title font-weight-light" id="modal_label">Manage</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            <a href="{% url 'view_listing' listing.id %}" class="btn btn-outline-dark mr-3">View Listing</a> 
+                            <a href="{% url 'edit_job_listing' listing.id %}" class="btn btn-outline-dark mr-3">Edit Listing</a>
+                            <a href="{% url 'view_applicants' listing.id %}" class="btn btn-outline-dark mr-3">View Applicants</a>
+                            <a href="{% url 'close_app' listing.id %}" class="btn btn-outline-danger mr-3">Close Application</a>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            {% else %}
+            {% if listing.posted_by == request.user %}
+                <div class="row">
+                    <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9 mx-auto border" id="closed-row">
                         <div class="d-flex justify-content-between mt-3 mb-3" >
                             <div class="d-flex align-items-center">
                                 <img src="{{ listing.logo_url }}" alt="Logo" class="mr-3">
                                 <h1 class="h3 mr-3">
                                     {{ listing.position_title }}<br><span class="h4">{{ listing.company }}</span><br>
-                                    <span class="h6">{{ listing.city }}, {{ listing.province_state }}, {{ listing.country }}. Posted: {{ listing.posted_date }}</span>
+                                    <span class="h6">
+                                        {% if listing.city %} {{ listing.city }}, {% endif %}
+                                        {% if listing.province_state %} {{ listing.province_state }}, {% endif %}
+                                        {{ listing.country }}. Posted: {{ listing.posted_date }}</span>
                                 </h1>
                             </div>
                             <div class="d-flex align-items-center">
-                                <a href="{% url 'view_listing' listing.id %}" class="btn btn-outline-dark mr-3">View</a> 
+                                <button type="button" class="btn btn-outline-dark mr-3" disabled>Closed!</button>
                             </div>
                         </div>
                     </div>
                 </div>
+            {% endif %}
+            {% endif %}
             {% endfor %}
         </div>
     </section>
 
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'jobportal/script.js' %}"></script>
 {% endblock %}

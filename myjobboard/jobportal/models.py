@@ -42,14 +42,24 @@ class JobListing(models.Model):
 
 class Application(models.Model):
     job_listing = models.ForeignKey(JobListing, on_delete=models.CASCADE, related_name='applications')
-    applicant = models.ForeignKey(User, on_delete=models.CASCADE, related_name='applications')
+    applicant = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='applications', blank=True, null=True)
     application_date = models.DateTimeField(auto_now_add=True)
-    cover_letter = models.BinaryField(blank=True, null=True)
-    resume = models.BinaryField(blank=True, null=True)
+
+    # PDF
+    cover_letter = models.FileField(upload_to='pdfs/cover_letters', default='txt.pdf', blank=True, null=True)
+    resume = models.FileField(upload_to='pdfs/resumes', default='txt.pdf')
+
+    # Information
     first_name = models.CharField(max_length=64, unique=False)
-    middle_name = models.CharField(max_length=64, unique=False)
+    middle_name = models.CharField(max_length=64, unique=False, blank=True, null=True)
     last_name = models.CharField(max_length=64, unique=False)
     email = models.EmailField(unique=False)
 
     def __str__(self):
-        return f"Application for {self.job_listing.position_title} by {self.applicant.username}"
+        return f"Application for {self.job_listing.position_title} by {self.first_name, self.last_name}"
+    
+    def get_resume_url(self):
+        return self.resume.url
+    
+    def get_cover_letter_url(self):
+        return self.cover_letter.url

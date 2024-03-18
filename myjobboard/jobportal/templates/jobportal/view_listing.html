@@ -78,11 +78,24 @@
           </button>
         </div>
         <div class="modal-body">
-          ...
+            <form method="post" enctype="multipart/form-data" action="{% url 'upload_application' listing.id %}"> 
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}
+                            {% if field.field.required %}
+                                <span class="text-danger">*</span>
+                            {% endif %}
+                        </label><br>
+                        {{ field }}
+                    </div>
+                 {% endfor %}
+                <button type="submit" style="display: none;" id="hiddenSubmitBtn"></button>
+            </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-outline-dark">Submit Application</button>
+          <button type="button" class="btn btn-outline-dark" onclick="document.getElementById('hiddenSubmitBtn').click()">Submit Application</button>
         </div>
       </div>
     </div>
