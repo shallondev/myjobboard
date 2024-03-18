@@ -1,4 +1,6 @@
-# CS50's Capstone MyJobBoard
+# CS50's Capstone Project "MyJobBoard"
+
+![Job Board Photo](jobs.jpg)
 
 ## Introduction
 This project uses django, JavaScript, HTML, and Boostrap to create a job board where users can post job ads, submit applications, and job posters can view resumes and cover letters.
