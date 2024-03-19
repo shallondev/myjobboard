@@ -3,7 +3,10 @@
 ![Job Board Photo](jobs.jpg)
 
 ## Introduction
-This project uses django, JavaScript, HTML, and Boostrap to create a job board where users can post job ads, submit applications, and job posters can view resumes and cover letters.
+This project uses django, JavaScript, HTML, and Boostrap to create a job board where users can post job ads, submit applications, and job posters can view resumes and cover letters.'
+
+## Video Demo
+https://www.youtube.com/watch?v=krjuYg493GM&ab_channel=Shallonp
 
 ## Distinctiveness and Complexity
 
@@ -16,6 +19,17 @@ My project diverges from previous web apps created in the course by offering enh
 The project meets the complexity requirements by incorporating Bootstrap to ensure that elements on the page dynamically render, making them viewable on both desktop and mobile devices. Three Django models are utilized to store information regarding job postings submitted, as well as applications sent to job postings. Additionally, a user model is implemented to manage registered users on the site. JavaScript is employed to dynamically render information regarding submissions to applications, and to add Bootstrap classes to navbar links upon clicking, providing visual cues to help users identify the active page.
 
 Further complexity has been integrated to empower users to create sophisticated job postings through Django forms enhanced with Bootstrap classes. The utilization of CKEditor enables job posters to craft postings according to their preferences, leveraging RichTextFields for styling flexibility. By incorporating Bootstrap classes, the postings become visually appealing and responsive. Moreover, error handling is seamlessly managed through Django forms, directing users to incorrect fields with precision, thereby enhancing the overall user experience. 
+
+## Features
+
+1. **Post a Job**: Authenticated users who have registered can create a job posting by using the nav bar to "Post a Job" where they can include further relevant details including, job title, location, logo url, etc. But can eloborate further by using rich text fields to create bullet points, bold text, formatting, etc.
+2. **Job Management**: A posted job can be managed by the creator by going to "Manage Job Postings" finding their desired post and viewing a modal where they can:
+    1. **View Listing** like a job seeker.
+    2. **Edit Listing**: Make changes to the job details.
+    3. **View Applicants**: See who has applied including their name, email, resume, and cover letter as PDF's.
+    4. **Close Application**: Close the application removing it from visibility of other users. Closed applications will be displayed as light gray and say they are closed for the creator to show that they have closed the application and wont appear at all for other users.
+3. **View and Apply**: Anyone can view a job posting on the homepage by clicking on the "view" button where they will be provided details including a summary, location, pay if provided, etc... At the bottom of the page they can apply where they can upload their resume and cover letter as a pdf to submit their application for the position.
+4. **Boostrap**: Boostrap is used to make the application look visually appealing, keep elements aligned, allow for modals for form submissions as to not redirect users to another page, and have a beautiful nav bar.
 
 ## How to Run
 
